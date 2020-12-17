@@ -4,9 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Customer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class CustomerFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -16,22 +16,24 @@ class CustomerFixtures extends Fixture implements DependentFixtureInterface
         return [UserFixtures::class];
     }
 
-
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create("fr_FR");
+        $faker = Factory::create('fr_FR');
 
         for ($i = 0; $i < 10; $i++) {
-            $customer = new Customer();
-            $customer->setFirstName($faker->firstName())
+            $cutomer = new Customer();
+
+            $cutomer->setFirstName($faker->firstName())
                 ->setLastName($faker->lastName())
                 ->setEmail($faker->email())
                 ->setCompany($faker->company());
 
-            $customer->setFreelancer($this->getReference("userAdmin"));
+            $user = $this->getReference('userlance');
+            $cutomer->setFreelancer($user);
 
-            $manager->persist($customer);
-            $this->addReference('customer' . $i, $customer);
+            $manager->persist($cutomer);
+
+            $this->addReference('customer' . $i, $user);
         }
 
         $manager->flush();

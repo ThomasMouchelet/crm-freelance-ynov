@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures;
 
+
 use App\Entity\Invoice;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Factory;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class InvoiceFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function getDependencies()
     {
         return [CustomerFixtures::class];
@@ -18,9 +18,9 @@ class InvoiceFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create("fr_FR");
+        $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 40; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $invoice = new Invoice();
 
             $invoice->setAmount($faker->randomFloat(2, 250, 5000))

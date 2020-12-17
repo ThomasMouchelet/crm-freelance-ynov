@@ -4,16 +4,9 @@ namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=InvoiceRepository::class)
- * @ApiResource(
- *          normalizationContext={
- *              "groups"={"invoices_read"}
- *          }
- * )
  */
 class Invoice
 {
@@ -21,31 +14,26 @@ class Invoice
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"invoices_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"invoices_read"})
      */
     private $amount;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"invoices_read"})
      */
     private $sendingAt;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"invoices_read"})
      */
     private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="invoices")
-     * @Groups({"invoices_read"})
      */
     private $customer;
 
