@@ -28,12 +28,12 @@ class CustomerFixtures extends Fixture implements DependentFixtureInterface
                 ->setEmail($faker->email())
                 ->setCompany($faker->company());
 
-            $user = $this->getReference('userlance');
+            $user = $this->getReference('userFreelance');
             $cutomer->setFreelancer($user);
 
-            $manager->persist($cutomer);
+            $this->addReference('customer' . $i, $cutomer);
 
-            $this->addReference('customer' . $i, $user);
+            $manager->persist($cutomer);
         }
 
         $manager->flush();
