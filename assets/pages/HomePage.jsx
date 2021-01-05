@@ -12,7 +12,6 @@ const HomePage = () => {
         try{
             const users = await usersAPI.findAll()
             setUsers(users)
-            setIsLoading(false)
         }catch (e){
             console.log(e)
         }
